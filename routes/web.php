@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [TaskController::class, 'show'])->middleware(['auth', 'role:admin'])->name('dashboard');
+
+Route::post('/taskstore', [TaskController::class, 'store'])->middleware(['auth', 'role:admin'])->name('tasks.store');
+
+Route::get('/taskview', [TaskController::class, 'view'])->middleware(['auth', 'role:admin'])->name('tasks.view');
+
+Route::get('/userdashboard', function () {
+    return view('userdashboard');
+})->middleware(['auth','verified'])->name('userdashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,6 +38,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
