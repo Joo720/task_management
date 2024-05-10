@@ -25,6 +25,8 @@ Route::get('/dashboard', [TaskController::class, 'show'])->middleware(['auth', '
 Route::post('/taskstore', [TaskController::class, 'store'])->middleware(['auth', 'role:admin'])->name('tasks.store');
 
 Route::get('/taskview', [TaskController::class, 'view'])->middleware(['auth', 'role:admin'])->name('tasks.view');
+Route::post('/updatetask/{id}', [TaskController::class, 'update'])->middleware(['auth', 'role:admin'])->name('task.update');
+Route::delete('/deletetask/{id}', [TaskController::class, 'delete'])->middleware(['auth', 'role:admin'])->name('task.delete');
 
 Route::get('/userdashboard', function () {
     return view('userdashboard');

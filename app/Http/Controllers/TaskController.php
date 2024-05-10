@@ -42,8 +42,23 @@ public function store(Request $request)
 
 public function view(Request $request)
 {
-    $tasks=Task::all();
-    return view('taskview');
+    $tasks = Task::with('user')->get();
+    return view('taskview', compact('tasks'));
 }
+
+public function delete(Request $request,$id)
+{
+    $task=Task::findorfail($id);
+    $task->delete();
+    return back();
+}
+
+public function update(Request $request,$id)
+{
+    $task = Task::findOrFail($id);
+    $task->fill($request->except('id'))->save(); // Exclude 'id' field from update
+    return back();
+}
+
 
 }

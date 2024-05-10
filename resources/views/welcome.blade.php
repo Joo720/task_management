@@ -28,9 +28,9 @@
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     @auth
                     @if(auth()->user()->role == 'admin')
-                        <a href="{{ url('/dashboard') }}" class="text-base mr-5 hover:text-gray-900">Dashboard</a>
+                        <a href="{{ url('/taskview') }}" class="text-base mr-5 hover:text-gray-900">Dashboard</a>
                         @else
-                        <a href="{{ url('/userdashboard') }}" class="text-base mr-5 hover:text-gray-900">UserDashboard</a>
+                        <a href="{{ url('/taskview') }}" class="text-base mr-5 hover:text-gray-900">UserDashboard</a>
                         @endif
                     @else
                         <a href="{{ route('login') }}" class="font-semibold bg-primary text-gray-600 hover:text-gray-900 dark:text-primary dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"><button type="button" class="btn btn-primary">Log in</button></a>
