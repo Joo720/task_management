@@ -24,22 +24,29 @@
     @include('layouts.nav')
 
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                    @auth
-                    @if(auth()->user()->role == 'admin')
-                        <a href="{{ url('/taskview') }}" class="text-base mr-5 hover:text-gray-900">Dashboard</a>
-                        @else
-                        <a href="{{ url('/taskview') }}" class="text-base mr-5 hover:text-gray-900">UserDashboard</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold bg-primary text-gray-600 hover:text-gray-900 dark:text-primary dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"><button type="button" class="btn btn-primary">Log in</button></a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold bg-primary text-gray-600 hover:text-gray-900 dark:text-white dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"><button type="button" class="btn btn-primary">Register</button> </a>
-                        @endif
-                    @endauth
-                </div>
+        @if (Route::has('login'))
+    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+        @auth
+            @if(auth()->user()->role == 'admin')
+                <a href="{{ url('/dashboard') }}" class="text-base mr-5 hover:text-gray-900">Dashboard</a>
+            @else
+                <a href="{{ url('/userdashboard') }}" class="text-base mr-5 hover:text-gray-900">UserDashboard</a>
             @endif
+        @else
+            <a href="{{ route('login') }}" class="font-semibold bg-primary text-gray-600 hover:text-gray-900 dark:text-primary dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                <button type="button" class="btn btn-primary">Log in</button>
+            </a>
+
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="ml-4 font-semibold bg-primary text-gray-600 hover:text-gray-900 dark:text-white dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    <button type="button" class="btn btn-primary">Register</button>
+                </a>
+            @endif
+        @endauth
+    </div>
+@endif
+<div>
+    <img src="banner1.jpg" class="max-h-screen max-w-100" />
+</div>
     </body>
 </html>

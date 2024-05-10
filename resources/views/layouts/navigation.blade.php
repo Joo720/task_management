@@ -16,6 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('comments')" :active="request()->routeIs('comments')">
+                       Go to the comments 
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->

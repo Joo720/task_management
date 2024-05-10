@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            All Task List 
         </h2>
     </x-slot>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
     @if($tasks->isEmpty())
         <div class="text-center">
             <h3>No tasks found</h3>
-            <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg">Create Task for users</a>
+            <a href="{{ route('tasks.view') }}" class="btn btn-primary btn-lg">Create Task for users</a>
         </div>
         @else
 
@@ -67,7 +67,7 @@
                 </tbody>     
 
         </table>
-        <a href="{{ route('dashboard')}}">
+        <a href="{{ route('tasks.view')}}">
         <button type="button" class="btn btn-primary btn-lg btn-block">Back To Task Creation</button>
         </a>
 <div class="modal fade" id="modelConfirm" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">

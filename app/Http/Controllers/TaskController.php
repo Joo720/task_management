@@ -36,7 +36,7 @@ public function store(Request $request)
     $task->status = $validatedData['status'];
     $task->file_path = $path; 
     $task->save();
-    return redirect()->route('tasks.view')->with('success', 'Task created successfully!');
+    return redirect()->route('dashboard')->with('success', 'Task created successfully!');
 
 }
 
