@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -58,6 +59,13 @@ public function update(Request $request,$id)
     $task = Task::findOrFail($id);
     $task->fill($request->except('id'))->save(); // Exclude 'id' field from update
     return back();
+}
+
+public function taskview()
+{
+    $user=Auth::id();
+    $data=Task::where('assigned_to',$user)->get();
+return view('userdashboard',compact('data'));
 }
 
 
