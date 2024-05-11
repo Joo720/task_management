@@ -60,7 +60,7 @@
                         <button onclick="openEditModal('modelConfirm', '{{$task->id}}', '{{$task->title}}', '{{$task->description}}', '{{$task->assigned_to}}', '{{$task->status}}')"
                             type="button" class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
                         <button onclick="openDeleteModal('modelConfirmDelete', '{{$task->id}}')" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-                        <button onclick="openCommentModal('modelcomment', '{{$task->id}}')" type="button" class="btn btn-primary"><i class="bi bi-chat-square"></i></button>
+                        <button onclick="openCommentModal('{{ $task->id }}')" class="btn btn-primary">Comment</button>
                         
                     </td>
                 </tr>
@@ -141,26 +141,26 @@
                 <h5 class="modal-title" id="modelConfirmDeleteLabel">Comment Task</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <p>Please Enter Your Comments here</p>
-                <div class="mb-3">
-                                <label for="description" class="form-label">{{ __('Description') }}</label>
-                                <textarea id="description" class="form-control" name="description" rows="3" required></textarea>
-                            </div>
-                <div class="mb-3">
-                                <label for="file" class="form-label">{{ __('File') }}</label>
-                                <input id="file" type="file" class="form-control" name="file">
-                            </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form id="deleteTaskForm" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="task_id" id="deleteTaskId">
+            <form id="commentForm"  method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <div class="modal-body">
+                <input type="hidden" name="task_id" id="task_id">
+                    <p>Please Enter Your Comments here</p>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">{{ __('Description') }}</label>
+                        <textarea id="description" class="form-control" name="content" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="file" class="form-label">{{ __('File') }}</label>
+                        <input id="file" type="file" class="form-control" name="file">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-success">Save</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -199,15 +199,11 @@
         document.getElementById('deleteTaskForm').action = '{{ route("task.delete", "") }}/' + taskId;
 
     }
-
-    function openCommentModal(modalId, taskId) {
-        var modal = new bootstrap.Modal(document.getElementById(modalId));
-        var deleteTaskIdInput = document.getElementById("deleteTaskId");
-        deleteTaskIdInput.value = taskId;
-        modal.show();
-        document.getElementById('deleteTaskForm').action = '{{ route("task.delete", "") }}/' + taskId;
-
-    }
+    function openCommentModal(taskId) {
+    var modal = new bootstrap.Modal(document.getElementById("modelcomment"));
+    modal.show();
+    document.getElementById('commentForm').action = '{{ route("comment.store", ":id") }}'.replace(':id', taskId);
+}
 
         // Function to close the modal
         function closeModal(modalId) {

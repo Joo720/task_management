@@ -81,16 +81,16 @@
 
     <script>
     function setStatus(value, button) {
-        // Remove active class from all buttons
+       
         var buttons = document.querySelectorAll('.btn-group button');
         buttons.forEach(function(btn) {
             btn.classList.remove('active');
         });
 
-        // Set active class to the clicked button
+     
         button.classList.add('active');
 
-        // Set value to hidden input
+     
         document.getElementById('status').value = value;
     }
 </script>

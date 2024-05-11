@@ -57,7 +57,7 @@ public function delete(Request $request,$id)
 public function update(Request $request,$id)
 {
     $task = Task::findOrFail($id);
-    $task->fill($request->except('id'))->save(); // Exclude 'id' field from update
+    $task->fill($request->except('id'))->save(); 
     return back();
 }
 

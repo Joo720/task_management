@@ -28,16 +28,14 @@ Route::get('/taskview', [TaskController::class, 'show'])->middleware(['auth', 'r
 Route::post('/updatetask/{id}', [TaskController::class, 'update'])->middleware(['auth', 'role:admin'])->name('task.update');
 Route::delete('/deletetask/{id}', [TaskController::class, 'delete'])->middleware(['auth', 'role:admin'])->name('task.delete');
 
-// Route::get('/userdashboard', function () {
-//     return view('userdashboard');
-// })->middleware(['auth', 'verified'])->name('userdashboard');
+
 Route::get('/userdashboard', [TaskController::class, 'taskview'])->middleware(['auth', 'verified'])->name('userdashboard');
 
+Route::post('/commentstore/{id}', [CommentController::class, 'store'])->name('comment.store');
+
+Route::get('/comments', [CommentController::class, 'show'])->middleware(['auth', 'role:admin'])->name('comments');
 
 
-Route::get('/comments', function () {
-    return view('comments');
-})->middleware(['auth', 'role:admin'])->name('comments');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
