@@ -58,11 +58,15 @@
 
                     <td>{{$task->user->name}}</td>
                     
-                    <td><img src="{{ asset('storage/' . $task->file_path) }}" alt="File"  width="50" height="50"></td>
+                    <td>
+    <a href="{{ asset('storage/' . $task->file_path) }}" target="_blank" >
+        <img src="{{ asset('storage/' . $task->file_path) }}" alt="File" width="50" height="50">
+    </a>
+</td>
                     <td>{{$task->status}}</td>
 
                     <td>
-                        <button onclick="openEditModal('modelConfirm', '{{$task->id}}', '{{$task->title}}', '{{$task->description}}', '{{$task->assigned_to}}', '{{$task->status}}')"
+                        <button onclick="openEditModal('modelConfirm', '{{$task->id}}', '{{$task->title}}', '{{$task->description}}', '{{$task->user->name}}', '{{$task->status}}')"
                             type="button" class="btn btn-success"><i class="bi bi-pencil-fill"></i></button>
                         <button onclick="openDeleteModal('modelConfirmDelete', '{{$task->id}}')" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                         <button onclick="openCommentModal('{{ $task->id }}')" class="btn btn-primary">Comment</button>
@@ -221,11 +225,18 @@
     const tableBody = document.createElement('tbody');
 
     comments.forEach(comment => {
+        const createdAt = new Date(comment.created_at);
+    const formattedDate = `${createdAt.getDate()}/${createdAt.getMonth() + 1}/${createdAt.getFullYear()} ${createdAt.getHours()}:${createdAt.getMinutes()}`;
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${comment.user_name}</td>
             <td>${comment.content}</td>
-            <td>${comment.created_at}</td>
+            <td>${formattedDate}</td>
+            <td>
+            <a href="/storage/${comment.file_path}" target="_blank">
+                <img src="/storage/${comment.file_path}" alt="File" width="50" height="50">
+            </a>
+        </td>
         `;
         tableBody.appendChild(row);
     });

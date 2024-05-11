@@ -46,7 +46,7 @@
     </div>
 @endif
 <div>
-    <img src="banner1.jpg" class="max-h-screen max-w-100" />
+    <img src="bc.jpg" class="max-h-screen max-w-full" />
 </div>
     </body>
 </html>

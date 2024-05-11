@@ -31,7 +31,9 @@
         <tr>
           <td>{{$datas->title}}</td>
           <td>{{$datas->description}}</td>
-          <td><img src="{{ asset('storage/' . $datas->file_path) }}" alt="File"  width="50" height="50"></td>
+          <td><a href="{{ asset('storage/' . $datas->file_path) }}" target="_blank" >
+        <img src="{{ asset('storage/' . $datas->file_path) }}" alt="File" width="50" height="50">
+    </a></td>
           <td>{{$datas->status}}</td>
           <td>
           <button onclick="openCommentModal('{{ $datas->id }}')" class="btn btn-primary">Comment</button>

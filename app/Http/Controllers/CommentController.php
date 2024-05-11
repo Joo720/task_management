@@ -22,6 +22,11 @@ class CommentController extends Controller
 
       
         $task = Task::findOrFail($id);
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->store('uploads');
+        } else {
+            $path = null;
+        }
 
         $comment = new Comment();
         $comment->user()->associate($user); 

@@ -38,7 +38,9 @@
                         <td>{{ $comment->user->name }}</td>
                         <td>{{ $comment->task->title }}</td>
                         <td>{{ $comment->content }}</td>
-                        <td><img src="{{ asset('storage/' . $comment->file_path) }}" alt="File"  width="50" height="50"></td>
+                        <td><a href="{{ asset('storage/' . $comment->file_path) }}" target="_blank" >
+        <img src="{{ asset('storage/' . $comment->file_path) }}" alt="File" width="50" height="50">
+    </a></td>
                         <td>{{ $comment->updated_at }}</td>
                     </tr>
                     @endforeach
