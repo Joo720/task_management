@@ -35,6 +35,10 @@ Route::post('/commentstore/{id}', [CommentController::class, 'store'])->name('co
 
 Route::get('/comments', [CommentController::class, 'show'])->middleware(['auth', 'role:admin'])->name('comments');
 
+Route::get('/usercomments', [CommentController::class, 'usershow'])->middleware(['auth', 'verified'])->name('user.comments');
+Route::get('/task/{id}/comments', [CommentController::class, 'getComments'])->name('task.comments');
+
+
 
 
 Route::middleware('auth')->group(function () {

@@ -36,6 +36,12 @@ public function store(Request $request)
     $task->assigned_to = $validatedData['assigned_to'];
     $task->status = $validatedData['status'];
     $task->file_path = $path; 
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads', $fileName, 'public'); // Specify 'public' disk
+        $task->file_path = $filePath;
+    }
     $task->save();
     return redirect()->route('dashboard')->with('success', 'Task created successfully!');
 

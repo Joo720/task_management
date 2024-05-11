@@ -21,5 +21,13 @@ class Comment extends Model
     {
         return $this->belongsTo(Task::class, 'task_id');
     }
+
+    
+    public function getComments($taskId) {
+        $comments = Comment::where('task_id', $taskId)
+                           ->with('user:id,name') 
+                           ->get(['id', 'content', 'user_id', 'created_at']); 
+        return response()->json(['comments' => $comments]);
+    }
     
 }

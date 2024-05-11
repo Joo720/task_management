@@ -1,6 +1,4 @@
 
-
-<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +14,7 @@
 
 </head>
 <body>
+    @include('usernav');
 <div class="card">
     <div class="card-header">
         <h5 class="card-title">Comments Details</h5>
@@ -50,4 +49,4 @@
 
 </body>
 </html>
-</x-app-layout>
+
